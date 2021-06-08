@@ -1,0 +1,19 @@
+Roles
+Users
+Profile
+Address
+Products
+Gallery
+Cover
+Tags
+Categories
+SubCategories
+
+Role (1-M) Users
+User (1-1) Profile
+Profile (1-1) Address
+Category (1-M) SubCategories
+SubCategory (1-M) Products
+Product (1-1) Cover
+Product (1-M) Galleries
+Tag (M-M) Product

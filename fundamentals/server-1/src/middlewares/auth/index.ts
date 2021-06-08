@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 const { JWT_KEY } = require('./../../configurations/index')
-const RES = require('./../../utils/response')
+const R = require('./../../utils/response')
 
 module.exports.tokenAuth = (req: any, res: any, next: any) => {
   try {
@@ -9,7 +9,7 @@ module.exports.tokenAuth = (req: any, res: any, next: any) => {
       token = token.split(' ')[1] // Bearer <token>
       jwt.verify(token, JWT_KEY, (err: any, decoded: any) => {
         if (err) {
-          res.json(RES(403, 'Decoding Error !'))
+          res.json(R(403, 'Decoding Error !'))
         } else {
           // res.json(RES(200, "Successfull !", decoded));
           next()
@@ -17,9 +17,9 @@ module.exports.tokenAuth = (req: any, res: any, next: any) => {
       })
     } else {
       token = null
-      res.json(RES(403, 'No Token Provided !'))
+      res.json(R(403, 'No Token Provided !'))
     }
   } catch (err) {
-    res.json(RES(403, 'Authentication Crashed Error'))
+    res.json(R(403, 'Authentication Crashed Error'))
   }
 }
