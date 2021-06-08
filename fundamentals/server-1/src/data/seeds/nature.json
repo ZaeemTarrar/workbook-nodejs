@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "zaeem",
+      "active": true
+    },
+    {
+      "id": 2,
+      "name": "wafa",
+      "active": true
+    },
+    {
+      "id": 3,
+      "name": "moin",
+      "active": false
+    }
+  ]
+}

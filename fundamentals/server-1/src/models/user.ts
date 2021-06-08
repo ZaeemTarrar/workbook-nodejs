@@ -1,9 +1,11 @@
 export {}
-const { INTEGER, STRING, BOOLEAN, DATE } = require('sequelize').DataTypes
+const { INTEGER, STRING, BOOLEAN, DATE, TEXT } = require('sequelize').DataTypes
 const { sequelize } = require('./../database/sequelize')
+// const { bcrypt } = require('bcrypt-nodejs')
+// const { EncryptionSalt } = require('./../configurations/index')
 
 /* ORM => Object Relational Model */
-const tableName: string = 'natures'
+const tableName: string = 'users'
 const Table: any = sequelize.define(
   tableName,
   {
@@ -13,13 +15,14 @@ const Table: any = sequelize.define(
       allowNull: false,
       primaryKey: true,
     },
-    name: {
+    username: {
       type: STRING,
       allowNull: false,
+      unique: true,
     },
-    active: {
-      type: BOOLEAN,
-      defaultValue: false,
+    password: {
+      type: STRING,
+      allowNull: false,
     },
   },
   {

@@ -3,7 +3,7 @@ const { INTEGER, STRING, BOOLEAN, DATE } = require('sequelize').DataTypes
 const { sequelize } = require('./../database/sequelize')
 
 /* ORM => Object Relational Model */
-const tableName: string = 'natures'
+const tableName: string = 'tags'
 const Table: any = sequelize.define(
   tableName,
   {
@@ -19,7 +19,7 @@ const Table: any = sequelize.define(
     },
     active: {
       type: BOOLEAN,
-      defaultValue: false,
+      defaultValue: true,
     },
   },
   {
