@@ -1,0 +1,20 @@
+{
+	"data": [
+		{
+			"id": 1,
+			"name": "air conditioner",
+			"available": true,
+			"price": 100,
+			"discount": 0,
+			"brand": "haier"
+		},
+		{
+			"id": 2,
+			"name": "television",
+			"available": true,
+			"price": 500,
+			"discount": 0,
+			"brand": "samsung"
+		}
+	]
+}

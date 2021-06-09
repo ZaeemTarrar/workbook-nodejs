@@ -1,13 +1,15 @@
-const { bcrypt } = require('bcrypt-nodejs')
-const { EncryptionSalt } = require('./../configurations/index')
+const bcrypt = require('bcrypt');
+const { EncryptionSalt } = require('./../configurations/index');
 
-export const GenerateHash = (password: string): string => {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(EncryptionSalt), null)
-}
+const GenerateHash = (password: string): Promise<string> => {
+	return bcrypt.hash(password, bcrypt.genSaltSync(EncryptionSalt));
+};
 
-export const ValidPassword = (
-  stringPassword: string,
-  encryptedPassword: string,
-): boolean => {
-  return bcrypt.compareSync(stringPassword, encryptedPassword)
-}
+const ValidPassword = (stringPassword: string, encryptedPassword: string): boolean => {
+	return bcrypt.compareSync(stringPassword, encryptedPassword);
+};
+
+module.exports = {
+	GenerateHash,
+	ValidPassword
+};

@@ -1,0 +1,24 @@
+{
+	"data": [
+		{
+			"id": 1,
+			"name": "electronics",
+			"active": true
+		},
+		{
+			"id": 2,
+			"name": "furniture",
+			"active": true
+		},
+		{
+			"id": 3,
+			"name": "kitchen",
+			"active": true
+		},
+		{
+			"id": 4,
+			"name": "food",
+			"active": true
+		}
+	]
+}

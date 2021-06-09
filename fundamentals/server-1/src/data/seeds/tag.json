@@ -1,0 +1,24 @@
+{
+	"data": [
+		{
+			"id": 1,
+			"name": "free",
+			"active": true
+		},
+		{
+			"id": 2,
+			"name": "offer",
+			"active": true
+		},
+		{
+			"id": 3,
+			"name": "delivery",
+			"active": true
+		},
+		{
+			"id": 4,
+			"name": "imported",
+			"active": true
+		}
+	]
+}

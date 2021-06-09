@@ -1,5 +1,5 @@
-export type T_TAG = {
-  id?: number
-  name: string
-  active: boolean
-}
+export type T_Tag = {
+	id?: number;
+	name: string;
+	active: boolean;
+};
