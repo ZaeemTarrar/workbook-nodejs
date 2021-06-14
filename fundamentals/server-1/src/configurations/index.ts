@@ -1,15 +1,15 @@
-import ip from 'ip';
+import ip from 'ip'
 
 /**
  * Application Port
  */
-const PORT: number = 3002;
-const IP: string = ip.address();
+const PORT: number = 3002
+const IP: string = ip.address()
 
 /**
  * Json Web Token
  */
-const JWT_KEY: string = '123456';
+const JWT_KEY: string = '123456'
 
 /**
  * One Time Password
@@ -18,38 +18,38 @@ const JWT_KEY: string = '123456';
 /**
  * Session
  */
-const SESSION_SECRET: string = '';
+const SESSION_SECRET: string = '123456'
 
 /**
  * Database
  */
-const CreateDb: boolean = true;
-const SeedDb: boolean = true;
-const RemoveDb: boolean = true;
-const RefreshDb: boolean = true;
+const CreateDb: boolean = true
+const SeedDb: boolean = true
+const RemoveDb: boolean = true
+const RefreshDb: boolean = true
 
 /**
  * Visual Logs
  */
-const ShowVisualLogsForEveryRequest: boolean = true;
+const ShowVisualLogsForEveryRequest: boolean = false
 
 /**
  * Password Encryptions
  */
-const EncryptionSalt: number = 8;
+const EncryptionSalt: number = 8
 
 /**
  * Export
  */
 module.exports = {
-	PORT,
-	IP,
-	JWT_KEY,
-	SESSION_SECRET,
-	CreateDb,
-	SeedDb,
-	RefreshDb,
-	RemoveDb,
-	EncryptionSalt,
-	ShowVisualLogsForEveryRequest
-};
+  PORT,
+  IP,
+  JWT_KEY,
+  SESSION_SECRET,
+  CreateDb,
+  SeedDb,
+  RefreshDb,
+  RemoveDb,
+  EncryptionSalt,
+  ShowVisualLogsForEveryRequest,
+}
