@@ -39,6 +39,11 @@ const ShowVisualLogsForEveryRequest: boolean = false
 const EncryptionSalt: number = 8
 
 /**
+ * Log Settings
+ */
+const ClearLogsOnEveryStartup: boolean = true
+
+/**
  * Export
  */
 module.exports = {
@@ -52,4 +57,5 @@ module.exports = {
   RemoveDb,
   EncryptionSalt,
   ShowVisualLogsForEveryRequest,
+  ClearLogsOnEveryStartup,
 }
