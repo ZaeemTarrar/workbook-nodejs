@@ -3,12 +3,20 @@
     {
       "id": 1,
       "username": "zaeem",
-      "password": "12345"
+      "password": "12345",
+      "role": "ADMIN"
     },
     {
       "id": 2,
       "username": "wafa",
-      "password": "123456"
+      "password": "123456",
+      "role": "MANAGER"
+    },
+    {
+      "id": 3,
+      "username": "moin",
+      "password": "1234567",
+      "role": "CLIENT"
     }
   ]
 }

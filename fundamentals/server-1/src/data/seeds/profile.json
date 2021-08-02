@@ -1,18 +1,28 @@
 {
-	"data": [
-		{
-			"id": 1,
-			"firstname": "zaeem",
-			"lastname": "tarar",
-			"age": 25,
-			"userId": 1
-		},
-		{
-			"id": 2,
-			"firstname": "wafa",
-			"lastname": "khan",
-			"age": 26,
-			"userId": 2
-		}
-	]
+  "data": [
+    {
+      "id": 1,
+      "firstname": "zaeem",
+      "lastname": "tarar",
+      "age": 25,
+      "userId": 1,
+      "snap": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+    },
+    {
+      "id": 2,
+      "firstname": "wafa",
+      "lastname": "khan",
+      "age": 26,
+      "userId": 2,
+      "snap": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+    },
+    {
+      "id": 3,
+      "firstname": "moin",
+      "lastname": "ahmad",
+      "age": 27,
+      "userId": 3,
+      "snap": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+    }
+  ]
 }

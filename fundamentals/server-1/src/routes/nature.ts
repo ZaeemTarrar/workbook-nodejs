@@ -1,16 +1,16 @@
-const express: any = require('express');
-const router: any = express.Router();
+const express: any = require('express')
+const router: any = express.Router()
 
-const con: any = require('./../controllers/nature');
+const natureController: any = require('./../controllers/nature')
 
 /* APIs */
-router.get('/', con.fetchAll);
-router.get('/:id', con.filterOne);
-router.get('/count/all', con.countAll);
-router.post('/', con.create);
-router.post('/search/all', con.search);
-router.post('/search/single', con.searchOne);
-router.patch('/:id', con.update);
-router.delete('/:id', con.remove);
+router.get('/', natureController.fetchAll)
+router.get('/:id', natureController.filterOne)
+router.get('/count/all', natureController.countAll)
+router.post('/', natureController.create)
+router.post('/search/all', natureController.search)
+router.post('/search/single', natureController.searchOne)
+router.patch('/:id', natureController.update)
+router.delete('/:id', natureController.remove)
 
-module.exports = router;
+module.exports = router

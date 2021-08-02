@@ -16,12 +16,12 @@ const Table: any = sequelize.define(
     firstname: {
       type: STRING,
       allowNull: true,
-      defaultValue: undefined,
+      defaultValue: '',
     },
     lastname: {
       type: STRING,
       allowNull: true,
-      defaultValue: undefined,
+      defaultValue: '',
     },
     age: {
       type: INTEGER,
@@ -31,7 +31,7 @@ const Table: any = sequelize.define(
     snap: {
       type: TEXT,
       allowNull: true,
-      defaultValue: undefined,
+      defaultValue: '',
     },
   },
   {
