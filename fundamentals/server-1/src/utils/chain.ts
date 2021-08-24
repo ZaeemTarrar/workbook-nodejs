@@ -1,3 +1,3 @@
-const Chain: Promise<void> = new Promise<void>((resolve, reject) => resolve());
+const Chain: Promise<void> = new Promise<void>((resolve, reject) => resolve())
 
-module.exports = Chain;
+module.exports = Chain

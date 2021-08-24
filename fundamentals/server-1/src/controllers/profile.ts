@@ -1,6 +1,6 @@
 export {}
 import sequelize, { Op } from 'sequelize'
-import { T_Nature } from './../contracts/model/nature'
+import { T_Profile, C_T_Profile } from './../contracts/model/profile'
 import {
   NOT_FOUND,
   INTERNAL_SERVER_ERROR,
@@ -13,13 +13,13 @@ import {
 } from 'http-status'
 
 const { CleanBlack } = require('./../utils/objects')
-const Nature = require('./../models/nature')
+const Profile = require('./../models/profile')
 const R = require('./../utils/response')
 
 module.exports.countAll = (req: any, res: any, next: any) => {
-  Nature.findAndCountAll({})
+  Profile.count({})
     .then((result: any) => {
-      if (result != 0) res.json(R(OK, null, result))
+      if (result != 0) res.json(R(OK, null, { count: result }))
       else res.json(R(NO_CONTENT, null, result))
     })
     .catch((e: Error) => {
@@ -28,7 +28,7 @@ module.exports.countAll = (req: any, res: any, next: any) => {
 }
 
 module.exports.fetchAll = (req: any, res: any, next: any) => {
-  Nature.findAll({})
+  Profile.findAll({})
     .then((result: any) => {
       if (result.length > 0) res.json(R(OK, null, result))
       else res.json(R(NO_CONTENT, null, result))
@@ -40,8 +40,8 @@ module.exports.fetchAll = (req: any, res: any, next: any) => {
 
 module.exports.filterOne = (req: any, res: any, next: any) => {
   try {
-    let id: number = req.params.id
-    Nature.findByPk(id)
+    let id: number = Number(req?.params?.id)
+    Profile.findByPk(id)
       .then((result: any) => {
         if (result) res.json(R(OK, null, result))
         else res.json(R(NO_CONTENT, null, result))
@@ -58,13 +58,15 @@ module.exports.filterOne = (req: any, res: any, next: any) => {
 
 module.exports.searchOne = (req: any, res: any, next: any) => {
   try {
-    let nature: any = {
+    let profile: T_Profile = {
       id: req.body.id,
-      name: req.body.name,
-      active: req.body.active,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      age: req.body.age,
+      snap: req.body.snap,
     }
-    nature = CleanBlack(nature)
-    Nature.findOne({ where: { ...nature } })
+    profile = CleanBlack(profile)
+    Profile.findOne({ where: { ...profile } })
       .then((result: any) => {
         if (result) res.json(R(OK, null, result))
         else res.json(R(NO_CONTENT, null, result))
@@ -81,13 +83,15 @@ module.exports.searchOne = (req: any, res: any, next: any) => {
 
 module.exports.search = (req: any, res: any, next: any) => {
   try {
-    let nature: any = {
+    let profile: T_Profile = {
       id: req.body.id,
-      name: req.body.name,
-      active: req.body.active,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      age: req.body.age,
+      snap: req.body.snap,
     }
-    nature = CleanBlack(nature)
-    Nature.findAll({ where: { ...nature } })
+    profile = CleanBlack(profile)
+    Profile.findAll({ where: { ...profile } })
       .then((result: any) => {
         if (result.length > 0) res.json(R(OK, null, result))
         else res.json(R(NO_CONTENT, null, result))
@@ -104,11 +108,15 @@ module.exports.search = (req: any, res: any, next: any) => {
 
 module.exports.create = (req: any, res: any, next: any) => {
   try {
-    let nature: T_Nature = {
-      name: req.body.name,
-      active: req.body.active,
+    let profile: C_T_Profile = {
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      age: req.body.age,
+      snap: req.body.snap,
+      userId: req.body.userId,
     }
-    Nature.create(nature)
+    profile = CleanBlack(profile)
+    Profile.create(profile)
       .then((result: any) => {
         res.json(R(CREATED, null, result))
       })
@@ -124,8 +132,8 @@ module.exports.create = (req: any, res: any, next: any) => {
 
 module.exports.remove = (req: any, res: any, next: any) => {
   try {
-    let id: number = req.params.id
-    Nature.findAll({ where: { id } })
+    let id: number = Number(req?.params?.id)
+    Profile.findAll({ where: { id } })
       .then((result: any) => {
         return result[0] || undefined
       })
@@ -149,20 +157,62 @@ module.exports.remove = (req: any, res: any, next: any) => {
 
 module.exports.update = (req: any, res: any, next: any) => {
   try {
-    let id: number = req.params.id
-    let nature: any = {
-      name: req.body.name,
-      active: req.body.active,
+    let id: number = Number(req?.params?.id)
+    let profile: T_Profile | any = {
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      age: req.body.age,
+      snap: req.body.snap,
     }
-    nature = CleanBlack(nature)
-    Nature.findAll({ where: { id } })
+    profile = CleanBlack(profile)
+    Profile.findAll({ where: { id } })
       .then((result: any) => {
         return result[0] || undefined
       })
       .then((result: any) => {
         if (result) {
-          for (let prop in nature) {
-            if (nature.hasOwnProperty(prop)) result[prop] = nature[prop]
+          for (let prop in profile) {
+            if (profile.hasOwnProperty(prop)) result[prop] = profile[prop]
+          }
+        }
+        return result
+      })
+      .then((result: any): void => {
+        if (result) {
+          result.save()
+          res.json(R(OK, `Item Updated`))
+        } else {
+          res.json(R(METHOD_NOT_ALLOWED, 'No Item Found, To Be Updated'))
+        }
+      })
+      .catch((e: Error) => {
+        res.json(R(NOT_MODIFIED, `Promise - Error: ${e.message || null}`))
+      })
+  } catch (err) {
+    res.json(
+      R(BAD_REQUEST, `Try Catch - Error: ${(err as Error).message || null}`),
+    )
+  }
+}
+
+module.exports.updateByUser = (req: any, res: any, next: any) => {
+  try {
+    let userId: number = Number(req?.params?.userId)
+    let profile: any = {
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      age: req.body.age,
+      snap: req.body.snap,
+    }
+    profile = CleanBlack(profile)
+    Profile.findAll({ where: { userId } })
+      .then((result: any) => {
+        return result[0] || undefined
+      })
+      .then((result: any) => {
+        if (result) {
+          for (let prop in profile) {
+            if (profile.hasOwnProperty(prop)) result[prop] = profile[prop]
           }
         }
         return result

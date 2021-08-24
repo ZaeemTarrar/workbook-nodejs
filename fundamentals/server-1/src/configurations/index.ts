@@ -31,7 +31,7 @@ const RefreshDb: boolean = true
 /**
  * Visual Logs
  */
-const ShowVisualLogsForEveryRequest: boolean = false
+const ShowVisualLogsForEveryRequest: boolean = true
 
 /**
  * Password Encryptions
