@@ -5,7 +5,7 @@ export {};
  */
 const express: any = require('express');
 const router: any = express.Router();
-const Controller: any = require('./../controllers/role');
+const Controller: any = require('./../controllers/user');
 
 /**
  * Routes

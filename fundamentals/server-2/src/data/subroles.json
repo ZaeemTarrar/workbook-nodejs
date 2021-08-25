@@ -1,0 +1,96 @@
+{
+	"data": [
+		{
+			"_id": "1",
+			"title": "System Administrator",
+			"activeStatus": true,
+			"Authorization": "1",
+			"Role": 1,
+			"Users": [ 1 ]
+		},
+		{
+			"_id": "2",
+			"title": "Application Administrator",
+			"activeStatus": true,
+			"Authorization": "2",
+			"Role": 1,
+			"Users": [ 2 ]
+		},
+		{
+			"_id": "3",
+			"title": "Application Superviser",
+			"activeStatus": true,
+			"Authorization": "3",
+			"Role": 1,
+			"Users": [ 3 ]
+		},
+		{
+			"_id": "4",
+			"title": "Plumber",
+			"activeStatus": true,
+			"Authorization": "4",
+			"Role": 2,
+			"Users": [ 4 ]
+		},
+		{
+			"_id": "5",
+			"title": "Electrician",
+			"activeStatus": true,
+			"Authorization": "5",
+			"Role": 2,
+			"Users": [ 5 ]
+		},
+		{
+			"_id": "6",
+			"title": "Janitor",
+			"activeStatus": false,
+			"Authorization": "6",
+			"Role": 2,
+			"Users": [ 6 ]
+		},
+		{
+			"_id": "7",
+			"title": "SWAT/QRF",
+			"activeStatus": true,
+			"Authorization": "7",
+			"Role": 3,
+			"Users": [ 7 ]
+		},
+		{
+			"_id": "8",
+			"title": "Fire Brigade",
+			"activeStatus": true,
+			"Authorization": "8",
+			"Role": 3,
+			"Users": [ 8 ]
+		},
+		{
+			"_id": "9",
+			"title": "Ambulance/Medical Assitance",
+			"activeStatus": true,
+			"Authorization": "9",
+			"Role": 3
+		},
+		{
+			"_id": "10",
+			"title": "Owner",
+			"activeStatus": true,
+			"Authorization": "10",
+			"Role": 4
+		},
+		{
+			"_id": "11",
+			"title": "Family Member",
+			"activeStatus": true,
+			"Authorization": "11",
+			"Role": 4
+		},
+		{
+			"_id": "12",
+			"title": "Family Servent",
+			"activeStatus": true,
+			"Authorization": "12",
+			"Role": 4
+		}
+	]
+}

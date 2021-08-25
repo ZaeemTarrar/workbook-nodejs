@@ -1,0 +1,39 @@
+{
+	"data": [
+		{
+			"_id": "1",
+			"contact": "03018555177",
+			"email": "adnan@dextrologix.com",
+			"password": "123456",
+			"SubRole": 1
+		},
+		{
+			"_id": "2",
+			"contact": "03204724064",
+			"email": "zaeemtarrar3@gmail.com",
+			"password": "123456",
+			"SubRole": 2
+		},
+		{
+			"_id": "3",
+			"contact": "03017820801",
+			"email": "shahrukhfarrukh57@gmail.com",
+			"password": "123456",
+			"SubRole": 3
+		},
+		{
+			"_id": "4",
+			"contact": "03214028059",
+			"email": "farazmughal74@gmail.com",
+			"password": "123456",
+			"SubRole": 4
+		},
+		{
+			"_id": "5",
+			"contact": "03024381225",
+			"email": "bilalamjad.1991@gmail.com",
+			"password": "123456",
+			"SubRole": 5
+		}
+	]
+}

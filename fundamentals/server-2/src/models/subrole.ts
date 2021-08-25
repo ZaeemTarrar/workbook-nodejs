@@ -3,13 +3,16 @@ export {};
 /**
  * Imports
  */
-const { model, Schema }: any = require('mongoose');
-const { blue, red, green, magenta, yellow, cyan, bold, gray }: any = require('colors');
+import { v4 } from 'uuid';
+const { model, Schema, Types }: any = require('mongoose');
+const { red, green, bold }: any = require('colors');
+const RolesCollection: any = require('./role');
+const AuthorizationsCollection: any = require('./authorization');
 
 /**
- * Name to be Saved and Used
+ * Name to be Saved & Used
  */
-const CollectionName: string = 'Role';
+const CollectionName: string = 'SubRole';
 
 /**
  * Model Schema
@@ -20,7 +23,6 @@ const scheme: any = new Schema({
 	},
 	title: {
 		type: String,
-		index: true,
 		unique: true,
 		required: [ true, 'Title is Required' ],
 		get: (v: any) => v.toLowerCase(),
@@ -29,7 +31,7 @@ const scheme: any = new Schema({
 			validator(v: any) {
 				return true;
 			},
-			message: (props: any) => `${props.value} is not a valid Title`
+			message: (props: any): string => `${props.value} is not a valid Title`
 		}
 	},
 	activeStatus: {
@@ -37,10 +39,19 @@ const scheme: any = new Schema({
 		default: true,
 		nullable: false
 	},
-	SubRoles: [
+	Authorization: {
+		type: String,
+		ref: 'Authorization'
+	},
+	Role: {
+		type: String,
+		ref: 'Role',
+		required: true
+	},
+	Users: [
 		{
 			type: String,
-			ref: 'SubRole'
+			ref: 'User'
 		}
 	]
 });
@@ -48,79 +59,77 @@ const scheme: any = new Schema({
 /**
  * Custom & Static Methods
  */
-// scheme.statics.ItemExistenceBridge = async function (
-//   id: any,
-//   cb: Function,
-// ): Promise<any> {
-//   const item = await this.findOne({ _id: id }).exec()
-//   if (item) cb()
-//   else throw new Error('Role not Found')
-// }
-
 scheme.statics.collectAll = function(): any {
-	return this.find({}).select('-SubRoles').exec();
+	return this.find({}).select('-Users -Role -Authorization').exec();
 };
 scheme.statics.collectOne = function(id: string): any {
-	return this.findOne({ _id: id }).select('-SubRoles').exec();
+	return this.findOne({ _id: id }).select('-Users -Role -Authorization').exec();
 };
 scheme.statics.CollectAll = function(): any {
 	return this.find({})
-		.populate({
-			path: 'SubRoles',
-			select: '-Role',
-			model: 'SubRole'
-			// populate: [
-			// 	{ path: 'Authorization', model: 'Authorization' },
-			// 	{ path: 'Users', model: 'User', select: '-SubRoles' }
-			// ]
-		})
+		.populate('Authorization', '-SubRole')
+		.populate('Role', '-SubRoles')
+		.populate('Users', '-SubRoles')
 		.exec();
 };
 scheme.statics.CollectOne = function(id: string): any {
 	return this.findOne({ _id: id })
-		.populate({
-			path: 'SubRoles',
-			select: '-Role',
-			model: 'SubRole'
-			// populate: [
-			// 	{ path: 'Authorization', model: 'Authorization' },
-			// 	{ path: 'Users', model: 'User', select: '-SubRoles' }
-			// ]
-		})
+		.populate('Authorization', '-SubRole')
+		.populate('Role', '-SubRoles')
+		.populate('Users', '-SubRoles')
 		.exec();
 };
-// scheme.statics.AddSubRole = async function (
-//   parent: string,
-//   id: string,
-// ): Promise<any> {
-//   return await this.findByIdAndUpdate(
-//     parent,
-//     { $push: { SubRoles: id } },
-//     { new: true, useFindAndModify: false },
-//   )
-//     .select('-SubRoles')
-//     .exec()
-// }
+scheme.statics.Create = async function(body: any): Promise<any> {
+	try {
+		const { title, role, authorization }: any = body;
+		const SubRoleCreation: any = await this.create({ _id: v4(), title, Role: role });
+		const AuthorizationCreation: any = await AuthorizationsCollection.create({
+			_id: v4(),
+			SubRole: SubRoleCreation._id,
+			...authorization
+		});
+		const Relation: any = await this.findByIdAndUpdate(
+			SubRoleCreation._id,
+			{ Authorization: AuthorizationCreation._id },
+			{ new: true, useFindAndModify: false }
+		);
+		return { creation: { subrole: SubRoleCreation, authorization: AuthorizationCreation }, relation: Relation };
+	} catch (err) {
+		throw new Error(`SubRole Creation Error: ${(<Error>err).message}`);
+	}
+};
+scheme.statics.DeleteOne = async function(id: string): Promise<any> {
+	try {
+		const SubRoleDeletion: any = await this.deleteOne({ _id: id });
+		return { deletion: SubRoleDeletion };
+	} catch (err) {
+		throw new Error(`SubRole Deletion Error: ${(<Error>err).message}`);
+	}
+};
+scheme.statics.UpdateOne = async function(id: string, body: any): Promise<any> {
+	try {
+		const SubRoleUpdation: any = await this.findByIdAndUpdate(id, body, { new: true, useFindAndModify: false });
+		const AuthorizationFound: any = await AuthorizationsCollection.findOne({ SubRole: id });
+		const AuthorizationUpdation: any = await AuthorizationsCollection.findByIdAndUpdate(
+			AuthorizationFound._id,
+			body.authorization,
+			{
+				new: true,
+				useFindAndModify: false
+			}
+		);
+		return { updation: { subrole: SubRoleUpdation, authorization: AuthorizationUpdation } };
+	} catch (err) {
+		throw new Error(`SubRole Updation Error: ${(<Error>err).message}`);
+	}
+};
+scheme.statics.AddUser = function(parent: string, id: string): any {
+	return this.findByIdAndUpdate(parent, { $push: { Users: id } }, { new: true, useFindAndModify: false });
+};
 
 /**
- * Action Hooks
+ * Action Logs
  */
-// scheme.pre('save', function (): void {
-//   if (DbHookConsoleLogs)
-//     console.log(
-//       bold(red(`[${CollectionName}-Save] `)),
-//       bold(cyan(`${CollectionName} is going to be saved`)),
-//     )
-// })
-// scheme.post('save', function (doc: any): void {
-//   if (DbHookConsoleLogs)
-//     console.log(
-//       bold(green(`[${CollectionName}-Save] `)),
-//       bold(blue(`${CollectionName} has been saved`)),
-//       bold(gray(JSON.stringify(doc))),
-//     )
-// })
-
 scheme.pre('find', function(): void {
 	console.log(bold(red(`[${CollectionName}-Find][Pre] `)));
 });
