@@ -1,0 +1,64 @@
+{
+  "data": [
+    {
+      "_id": "1",
+      "firstName": "Adnan",
+      "middleName": "",
+      "lastName": "",
+      "dateOfBirth": "",
+      "cnic": "",
+      "gender": "male",
+      "snap": "",
+      "Address": "1",
+      "User": "1"
+    },
+    {
+      "_id": "2",
+      "firstName": "zaeem",
+      "middleName": "",
+      "lastName": "tarrar",
+      "dateOfBirth": "",
+      "cnic": "",
+      "gender": "male",
+      "snap": "",
+      "Address": "2",
+      "User": "2"
+    },
+    {
+      "_id": "3",
+      "firstName": "Shahrukh",
+      "middleName": "",
+      "lastName": "Farrukh",
+      "dateOfBirth": "",
+      "cnic": "",
+      "gender": "male",
+      "snap": "",
+      "Address": "3",
+      "User": "3"
+    },
+    {
+      "_id": "4",
+      "firstName": "Faraz",
+      "middleName": "",
+      "lastName": "Mughal",
+      "dateOfBirth": "",
+      "cnic": "",
+      "gender": "male",
+      "snap": "",
+      "Address": "4",
+      "User": "4"
+    },
+    {
+      "_id": "5",
+      "firstName": "Bilal",
+      "middleName": "",
+      "lastName": "Amjad",
+      "dateOfBirth": "",
+      "cnic": "",
+      "gender": "male",
+      "snap": "",
+      "Address": "5",
+      "User": "5"
+    }
+  ]
+}

@@ -69,14 +69,14 @@ scheme.statics.CollectAll = function(): any {
 	return this.find({})
 		.populate('Authorization', '-SubRole')
 		.populate('Role', '-SubRoles')
-		.populate('Users', '-SubRoles')
+		.populate('Users', '-SubRole')
 		.exec();
 };
-scheme.statics.CollectOne = function(id: string): any {
+scheme.statics.CollectOne = function(id: string): Promise<any> {
 	return this.findOne({ _id: id })
 		.populate('Authorization', '-SubRole')
 		.populate('Role', '-SubRoles')
-		.populate('Users', '-SubRoles')
+		.populate('Users', '-SubRole')
 		.exec();
 };
 scheme.statics.Create = async function(body: any): Promise<any> {
@@ -95,7 +95,7 @@ scheme.statics.Create = async function(body: any): Promise<any> {
 		);
 		return { creation: { subrole: SubRoleCreation, authorization: AuthorizationCreation }, relation: Relation };
 	} catch (err) {
-		throw new Error(`SubRole Creation Error: ${(<Error>err).message}`);
+		throw new Error((<Error>err).message);
 	}
 };
 scheme.statics.DeleteOne = async function(id: string): Promise<any> {
@@ -103,7 +103,7 @@ scheme.statics.DeleteOne = async function(id: string): Promise<any> {
 		const SubRoleDeletion: any = await this.deleteOne({ _id: id });
 		return { deletion: SubRoleDeletion };
 	} catch (err) {
-		throw new Error(`SubRole Deletion Error: ${(<Error>err).message}`);
+		throw new Error((<Error>err).message);
 	}
 };
 scheme.statics.UpdateOne = async function(id: string, body: any): Promise<any> {
@@ -120,7 +120,7 @@ scheme.statics.UpdateOne = async function(id: string, body: any): Promise<any> {
 		);
 		return { updation: { subrole: SubRoleUpdation, authorization: AuthorizationUpdation } };
 	} catch (err) {
-		throw new Error(`SubRole Updation Error: ${(<Error>err).message}`);
+		throw new Error((<Error>err).message);
 	}
 };
 scheme.statics.AddUser = function(parent: string, id: string): any {

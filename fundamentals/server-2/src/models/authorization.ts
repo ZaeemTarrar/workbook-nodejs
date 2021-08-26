@@ -195,9 +195,6 @@ const scheme: any = new Schema({
 /**
  * Custom & Static Mehtods
  */
-// scheme.statics.CollectAll = async function(res: any, cb: Function): Promise<void> {
-// 	cb(await this.find({}).exec());
-// };
 
 /**
  * Actions Hooks

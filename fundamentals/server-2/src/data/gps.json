@@ -1,0 +1,34 @@
+{
+	"data": [
+		{
+			"_id": "1",
+			"latitude": "123456",
+			"longitude": "654321",
+			"Address": "1"
+		},
+		{
+			"_id": "2",
+			"latitude": "123456",
+			"longitude": "654321",
+			"Address": "2"
+		},
+		{
+			"_id": "3",
+			"latitude": "123456",
+			"longitude": "654321",
+			"Address": "3"
+		},
+		{
+			"_id": "4",
+			"latitude": "123456",
+			"longitude": "654321",
+			"Address": "4"
+		},
+		{
+			"_id": "5",
+			"latitude": "123456",
+			"longitude": "654321",
+			"Address": "5"
+		}
+	]
+}

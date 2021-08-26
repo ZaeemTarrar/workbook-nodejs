@@ -30,6 +30,7 @@ const ApiTools: any = require('./libraries/ApiTools/index');
 const { RedisConnection, setSession, getSession }: any = require('./storage/redisServer');
 const { MongoConnection }: any = require('./database/mongoose');
 const { SUCCESS, ERROR }: any = require('./static/Message/index');
+const RegisterSocketPipes: any = require('./pipes/index');
 
 /**
  * Express Application
@@ -57,6 +58,7 @@ app.use(morgan('combined', Morgan.AccessLogStream));
  * Custom Middlewares
  */
 app.use(ApiTools.gate);
+const AUTH: any = require('./middlewares/auth/index');
 
 /**
  * Process Forks
@@ -72,10 +74,12 @@ apiGroup.use('/auth', require('./routes/auth'));
 apiGroup.use('/roles', require('./routes/role'));
 apiGroup.use('/subroles', require('./routes/subrole'));
 apiGroup.use('/users', require('./routes/user'));
+apiGroup.use('/complains', require('./routes/complain'));
+apiGroup.use('/feeds', require('./routes/feed'));
 
 lockedGroup.use('/test', () => {});
 
-apiGroup.use('/locked', lockedGroup);
+apiGroup.use('/locked', AUTH, lockedGroup);
 
 /**
  * Router Grouping
@@ -120,6 +124,12 @@ const LaunchServer: Function = async (): Promise<void> => {
    * Integrating Request Statistics Logs
    */
 	requestStats(server, function(stats: any) {});
+
+	/**
+     * Sockets
+     */
+	const IO: any = Socket(server);
+	await RegisterSocketPipes(IO, server);
 
 	/**
    * Launching Server Listening Process

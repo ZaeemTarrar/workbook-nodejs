@@ -6,6 +6,11 @@ const RolesSeeds: any = require('./../seeds/role');
 const SubRolesSeeds: any = require('./../seeds/subrole');
 const AuthorizationsSeeds: any = require('./../seeds/authorization');
 const UsersSeeds: any = require('./../seeds/user');
+const ProfilesSeeds: any = require('./../seeds/profile');
+const AddressesSeeds: any = require('./../seeds/address');
+const GpsSeeds: any = require('./../seeds/gps');
+const ComplainsSeeds: any = require('./../seeds/complain');
+const FeedsSeeds: any = require('./../seeds/feed');
 
 /**
  * Main Script Launcher
@@ -28,6 +33,11 @@ const LaunchScript: Function = async (): Promise<void> => {
 	await SubRolesSeeds();
 	await AuthorizationsSeeds();
 	await UsersSeeds();
+	await ProfilesSeeds();
+	await AddressesSeeds();
+	await GpsSeeds();
+	await ComplainsSeeds();
+	await FeedsSeeds();
 
 	/**
    * Exit Script Process

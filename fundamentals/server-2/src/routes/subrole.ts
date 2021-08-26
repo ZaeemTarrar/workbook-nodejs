@@ -12,8 +12,8 @@ const Controller: any = require('./../controllers/subrole');
  */
 router.get('/', Controller.fetchAll);
 router.get('/extra', Controller.fetchAllExtra);
-router.get('/:id', Controller.fetchOne);
 router.get('/extra/:id', Controller.fetchOneExtra);
+router.get('/:id', Controller.fetchOne);
 router.post('/', Controller.create);
 router.patch('/:id', Controller.update);
 router.delete('/:id', Controller.remove);

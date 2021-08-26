@@ -48,15 +48,6 @@ const scheme: any = new Schema({
 /**
  * Custom & Static Methods
  */
-// scheme.statics.ItemExistenceBridge = async function (
-//   id: any,
-//   cb: Function,
-// ): Promise<any> {
-//   const item = await this.findOne({ _id: id }).exec()
-//   if (item) cb()
-//   else throw new Error('Role not Found')
-// }
-
 scheme.statics.collectAll = function(): any {
 	return this.find({}).select('-SubRoles').exec();
 };
@@ -68,11 +59,11 @@ scheme.statics.CollectAll = function(): any {
 		.populate({
 			path: 'SubRoles',
 			select: '-Role',
-			model: 'SubRole'
-			// populate: [
-			// 	{ path: 'Authorization', model: 'Authorization' },
-			// 	{ path: 'Users', model: 'User', select: '-SubRoles' }
-			// ]
+			model: 'SubRole',
+			populate: [
+				{ path: 'Authorization', model: 'Authorization' },
+				{ path: 'Users', model: 'User', select: '-SubRoles' }
+			]
 		})
 		.exec();
 };
@@ -81,46 +72,18 @@ scheme.statics.CollectOne = function(id: string): any {
 		.populate({
 			path: 'SubRoles',
 			select: '-Role',
-			model: 'SubRole'
-			// populate: [
-			// 	{ path: 'Authorization', model: 'Authorization' },
-			// 	{ path: 'Users', model: 'User', select: '-SubRoles' }
-			// ]
+			model: 'SubRole',
+			populate: [
+				{ path: 'Authorization', model: 'Authorization' },
+				{ path: 'Users', model: 'User', select: '-SubRoles' }
+			]
 		})
 		.exec();
 };
-// scheme.statics.AddSubRole = async function (
-//   parent: string,
-//   id: string,
-// ): Promise<any> {
-//   return await this.findByIdAndUpdate(
-//     parent,
-//     { $push: { SubRoles: id } },
-//     { new: true, useFindAndModify: false },
-//   )
-//     .select('-SubRoles')
-//     .exec()
-// }
 
 /**
  * Action Hooks
  */
-// scheme.pre('save', function (): void {
-//   if (DbHookConsoleLogs)
-//     console.log(
-//       bold(red(`[${CollectionName}-Save] `)),
-//       bold(cyan(`${CollectionName} is going to be saved`)),
-//     )
-// })
-// scheme.post('save', function (doc: any): void {
-//   if (DbHookConsoleLogs)
-//     console.log(
-//       bold(green(`[${CollectionName}-Save] `)),
-//       bold(blue(`${CollectionName} has been saved`)),
-//       bold(gray(JSON.stringify(doc))),
-//     )
-// })
-
 scheme.pre('find', function(): void {
 	console.log(bold(red(`[${CollectionName}-Find][Pre] `)));
 });

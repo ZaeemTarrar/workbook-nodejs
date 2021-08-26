@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "fcm-node": "^1.6.1"
+  }
+}

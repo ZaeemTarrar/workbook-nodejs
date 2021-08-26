@@ -1,0 +1,64 @@
+{
+	"data": [
+		{
+			"_id": "1",
+			"heading": "Test Feed Heading",
+			"message": "Test Message",
+			"description": "Test Description",
+			"thumbnail": "Test Thumbnail",
+			"status": true,
+			"feedType": "PUBLIC_FEED",
+			"startDate": "",
+			"endDate": "",
+			"User": "1"
+		},
+		{
+			"_id": "2",
+			"heading": "Test Heading",
+			"message": "Test Message",
+			"description": "Test Description",
+			"thumbnail": "Test Thumbnail",
+			"status": true,
+			"feedType": "PUBLIC_FEED",
+			"startDate": "",
+			"endDate": "",
+			"User": "1"
+		},
+		{
+			"_id": "3",
+			"heading": "Test Heading",
+			"message": "Test Message",
+			"description": "Test Description",
+			"thumbnail": "Test Thumbnail",
+			"status": true,
+			"feedType": "PUBLIC_FEED",
+			"startDate": "",
+			"endDate": "",
+			"User": "1"
+		},
+		{
+			"_id": "4",
+			"heading": "Test Heading",
+			"message": "Test Message",
+			"description": "Test Description",
+			"thumbnail": "Test Thumbnail",
+			"status": true,
+			"feedType": "PUBLIC_FEED",
+			"startDate": "",
+			"endDate": "",
+			"User": "1"
+		},
+		{
+			"_id": "5",
+			"heading": "Test Heading",
+			"message": "Test Message",
+			"description": "Test Description",
+			"thumbnail": "Test Thumbnail",
+			"status": true,
+			"feedType": "PRIVATE_FEED",
+			"startDate": "",
+			"endDate": "",
+			"User": "1"
+		}
+	]
+}
